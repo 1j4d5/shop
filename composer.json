@@ -1,0 +1,19 @@
+{
+    "name": "1j4d5/shop",
+    "description": "PHP Advance course",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "1j4d5\\Shop\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "1j4d5",
+            "email": "ijads.main@gmail.com"
+        }
+    ],
+    "require": {
+        "bankofmaldives/bml-connect-php": "^2.1"
+    }
+}
