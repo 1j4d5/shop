@@ -13,12 +13,12 @@ $routes = [
         return "show users edit from id".$params?? "";
     }, 
     "/users/{id}/delete" => function ($params) {
-        return "show users edit from id ".$params?? "";
+        return "show users deletes from id ".$params?? "";
     }    
 ];
 $uri = $_SERVER["REQUEST_URI"];
 $callable = $routes[$uri]??null;
-$params = [];
+$params = ["id"];
 if (! $callable) {
     foreach ($routes as $route => $function) {
 
@@ -41,4 +41,4 @@ if (! $callable) {
        }
     }
 }
-echo $callable($params);
+echo $callable($params["id"]);
