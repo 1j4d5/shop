@@ -1,44 +1,11 @@
 <?php
-$routes = [
-    "/" => function ( $params = null) {
-        return "welcome home";
-    },
-    "/users" => function ($params=null) {
-        return "users index";
-    },
-    "/users/{id}" => function ($params) {
-        return "show user from id".$params["id"]?? "";
-    },  
-    "/users/{id}/edit" => function ($params) {
-        return "show users edit from id".$params?? "";
-    }, 
-    "/users/{id}/delete" => function ($params) {
-        return "show users deletes from id ".$params?? "";
-    }    
-];
-$uri = $_SERVER["REQUEST_URI"];
-$callable = $routes[$uri]??null;
-$params = ["id"];
-if (! $callable) {
-    foreach ($routes as $route => $function) {
+include __DIR__ . "/../vendor/autoload.php";
+use App\framwork\Router;
+$router = new Router;
+$router->get("/", function ($params = null) {return "welcome home";})
+       ->post("/users", function ($params = null) {return "users index";}) 
+       ->get("/users/{id}", function ($params = null) {return "user show of id ".$params["id"] ?? "";})
+       ->get("/users/{id}/edit", function ($params = null) {return "user edit of id ".$params["id"] ?? "";})
+       ->get("/users/{id}/delete", function ($params = null) {return "user delete of id ".$params["id"] ?? "";});
 
-       if (str_contains($route, "{id}")) {
-
-        $pattern = str_replace("/","\/",$route);
-
-        $pattern = str_replace("{id}", "(\d+)", $pattern);
-
-        preg_match_all("/".$pattern."-/", $uri."-", $matches);
-
-        if (isset($matches[sizeof($matches)-1][0])) {
-
-            $params["id"] = $matches[sizeof($matches)-1][0];
-
-            $callable = $function;
-
-            break;
-        }        
-       }
-    }
-}
-echo $callable($params["id"]);
+echo $router->resolve($_SERVER["REQUEST_URI"], $_SERVER["REQUEST_METHOD"]);       

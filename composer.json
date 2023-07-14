@@ -4,7 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "1j4d5\\Shop\\": "src/"
+            "App\\": "src/app/"
         }
     },
     "authors": [
