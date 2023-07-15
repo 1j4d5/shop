@@ -18,7 +18,7 @@ Class Router
         try{
         $params = [];    
         $input = parse_url($uri);  
-        $uri = $input["path"];
+        $uri = rtrim($input["path"]);
         if (isset($input["query"])) {
             parse_str($input["query"], $params);  
         }
