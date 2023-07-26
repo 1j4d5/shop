@@ -4,12 +4,12 @@ use App\Exception\PageNotFound;
 Class Router
 {
     protected $routes = [];
-    public function get(string $path, callable $function) : Router {
+    public function get(string $path, callable|array $function) : Router {
         $this->routes["GET"][$path] = $function;
         
         return $this;
     }
-    public function post(string $path, callable $function) : Router {
+    public function post(string $path, callable|array $function) : Router {
         $this->routes["POST"][$path] = $function;
         
         return $this;
@@ -17,7 +17,8 @@ Class Router
     public function resolve($uri,$url, $method) : string {
         try{
             $params = [];    
-            $input = parse_url($uri);         
+            $input = parse_url($uri);  
+                   
             if (!$url) {
                 
                 if ($input == false) {
@@ -31,17 +32,17 @@ Class Router
                     $uri = $input["path"];
                 }
             }else {
-                
-                
                 $uri = rtrim($url, "/");
                 
+                
+                
             }
-            
+            $callable = $this->routes[$method][$uri] ?? null;
             if (isset($input["query"])) {
                 parse_str($input["query"], $params);  
             }
         
-         $callable = $this->routes[$method][$uri] ?? null;
+         
         
         
         if (! $callable) {
@@ -62,7 +63,7 @@ Class Router
             throw new PageNotFound();
         }
 
-        return $callable($params);
+        return call_user_func($callable, $params);
 
     }catch(\Exception $Exception){
         if ($Exception instanceof PageNotFound) {
