@@ -14,14 +14,32 @@ Class Router
         
         return $this;
     }
-    public function resolve($uri, $method) : string {
+    public function resolve($uri,$url, $method) : string {
         try{
-        $params = [];    
-        $input = parse_url($uri);  
-        $uri = rtrim($input["path"], "/");
-        if (isset($input["query"])) {
-            parse_str($input["query"], $params);  
-        }
+            $params = [];    
+            $input = parse_url($uri);         
+            if (!$url) {
+                
+                if ($input == false) {
+                    $input = ["path"];
+                    $input["path"] = trim($uri, "/");
+                    $input["path"] = "/".$input["path"];    
+                }
+                if ($input["path"] !== "/") {
+                    $uri = rtrim($input["path"], "/");
+                }else {
+                    $uri = $input["path"];
+                }
+            }else {
+                
+                
+                $uri = rtrim($url, "/");
+                
+            }
+            
+            if (isset($input["query"])) {
+                parse_str($input["query"], $params);  
+            }
         
          $callable = $this->routes[$method][$uri] ?? null;
         
