@@ -10,7 +10,7 @@ $router->get("/", [HomeController::class, "index"]);
 $router->get("/users", [UsersController::class, "index"]) 
        ->post("/users", [UsersController::class, "store"]) 
        ->get("/users/{id}", [UsersController::class, "show"])
-       ->get("/users/{id}", [UsersController::class, "update"])
+       ->post("/users/{id}", [UsersController::class, "update"])
        ->get("/users/{id}/edit", [UsersController::class, "edit"])       
        ->get("/users/{id}/delete", [UsersController::class, "delete"]);
 
