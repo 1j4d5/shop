@@ -1,5 +1,8 @@
 <?php
 include __DIR__ . "/../vendor/autoload.php";
+include __DIR__ . "/../src/app/helpers.php";
+define("VIEW_PATH", __DIR__."/../src/views");
+
 use App\framwork\Router;
 use App\Controllers\Admin\UsersController;
 use App\Controllers\HomeController;
