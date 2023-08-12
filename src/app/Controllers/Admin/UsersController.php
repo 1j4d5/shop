@@ -6,12 +6,11 @@ class UsersController
 {
     public static function index($params) : string 
     {
-        return view("layouts.admin");
+        return view("admin.users.index", ["name" => "ijads imy"]);
     }
     public static function create($params) : string 
-    {
-        
-        return "create method";    
+    {        
+        return view("admin.users.create");    
     }
     public static function store($params) : string 
     {

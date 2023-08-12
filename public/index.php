@@ -11,7 +11,8 @@ $router = new Router;
 $router->get("/", [HomeController::class, "index"]);
 //useRS
 $router->get("/users", [UsersController::class, "index"]) 
-       ->post("/users", [UsersController::class, "store"]) 
+       ->post("/users", [UsersController::class, "store"])
+       ->get("/users/create", [UsersController::class, "create"])  
        ->get("/users/{id}", [UsersController::class, "show"])
        ->post("/users/{id}", [UsersController::class, "update"])
        ->get("/users/{id}/edit", [UsersController::class, "edit"])       

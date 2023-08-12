@@ -14,7 +14,6 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!--  Menu -->
-
       <?php partial("_sidebar");?>
       <!-- / Menu -->
 
@@ -27,9 +26,13 @@
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
-           
+          <div class="container-xxl flex-grow-1 container-p-y">
+            <!--content-->
+            {{ $content }}
+            <!--content-->
+          </div>
             <!-- Footer -->
-            
+            <?php partial("_footer");?>
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -48,18 +51,18 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="./assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="./assets/vendor/libs/popper/popper.js"></script>
-    <script src="./assets/vendor/js/bootstrap.js"></script>
-    <script src="./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="<?= assets("./assets/vendor/libs/jquery/jquery.js")?>"></script>
+    <script src="<?= assets("./assets/vendor/libs/popper/popper.js")?>"></script>
+    <script src="<?= assets("./assets/vendor/js/bootstrap.js")?>"></script>
+    <script src="<?= assets("./assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js")?>"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="<?= assets("./assets/vendor/js/menu.js")?>"></script>
     <!-- endbuild -->
 
     <!-- Vendors JS -->
 
     <!-- Main JS -->
-    <script src="./assets/js/main.js"></script>
+    <script src="<?= assets("./assets/js/main.js")?>"></script>
 
     <!-- Page JS -->
 

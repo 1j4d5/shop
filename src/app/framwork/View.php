@@ -3,12 +3,25 @@
 namespace App\framwork;
 
 class View{
-    public static function render(string $path):string
+    protected string $layout = "layouts.admin"; 
+    public function __construct(protected string $path, protected array $data = []) 
     {
-        $parts = explode(".", $path);
-        $path = implode("/", $parts);
+
+    }
+    public function render():string
+    {
+       
+        $template = $this->load($this->layout);
+        $content = $this->load($this->path);
+        
+        return \str_replace('{{ $content }}', $content, $template);
+    }
+    private function load($path) : string {
+        $path = \str_replace(".","/", $path);
         \ob_start();
+        \extract($this->data);
         include(VIEW_PATH."/".$path.".php");
-        return (string)\ob_get_clean();    
+        return (string)\ob_get_clean();
+
     }
 }
