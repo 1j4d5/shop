@@ -4,6 +4,11 @@ use App\Exception\PageNotFound;
 Class Router
 {
     protected $routes = [];
+    public function sendq($type, string $path, callable|array $function) : Router {
+        $this->routes[$type][$path] = $function;
+        
+        return $this;
+    }
     public function get(string $path, callable|array $function) : Router {
         $this->routes["GET"][$path] = $function;
         
@@ -14,11 +19,35 @@ Class Router
         
         return $this;
     }
+    public function patch(string $path, callable|array $function) : Router {
+        $this->routes["PATCH"][$path] = $function;
+        
+        return $this;
+    }
+    public function put(string $path, callable|array $function) : Router {
+        $this->routes["PUT"][$path] = $function;
+        
+        return $this;
+    }
+    public function delete(string $path, callable|array $function) : Router {
+        $this->routes["DELETE"][$path] = $function;
+        
+        return $this;
+    }
+    public function head(string $path, callable|array $function) : Router {
+        $this->routes["HEAD"][$path] = $function;
+        
+        return $this;
+    }
+    public function options(string $path, callable|array $function) : Router {
+        $this->routes["OPTIONS"][$path] = $function;
+        
+        return $this;
+    }
     public function resolve($uri,$url, $method) : string {
         try{
             $params = [];    
-            $input = parse_url($uri);  
-                   
+            $input = parse_url($uri);
             if (!$url) {
                 
                 if ($input == false) {

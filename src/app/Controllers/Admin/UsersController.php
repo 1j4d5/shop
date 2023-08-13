@@ -12,6 +12,11 @@ class UsersController
     {        
         return view("admin.users.create");    
     }
+    public static function show($params) : string 
+    {
+        
+        return "show method for: ".$params["id"];    
+    }
     public static function store($params) : string 
     {
         
